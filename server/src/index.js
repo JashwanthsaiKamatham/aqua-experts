@@ -106,6 +106,18 @@ app.use('/api', (_req, res) => res.status(404).json({ error: 'Endpoint not found
 
 // Central error handler — never leaks stack traces to the browser.
 app.use((err, _req, res, _next) => {
+  // Postgres/PostgREST "table missing" → tell the operator what to run
+  const missingTable =
+    err.code === '42P01' ||
+    err.code === 'PGRST205' ||
+    /could not find the table|relation .* does not exist/i.test(err.message || '');
+  if (missingTable) {
+    console.error('[db] tables are missing — run `npm run db:setup`');
+    return res.status(503).json({
+      error: 'The database is not initialised yet. Run `npm run db:setup` on the server.'
+    });
+  }
+
   const status = err.status || 500;
   if (status >= 500) console.error('[error]', err.message, err.cause?.message || '');
   const message =
