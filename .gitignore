@@ -1,0 +1,46 @@
+# ── secrets ─────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── dependencies ────────────────────────────────────────
+node_modules
+.pnp
+.pnp.js
+
+# ── builds ──────────────────────────────────────────────
+dist
+dist-ssr
+build
+out
+.vercel
+.netlify
+.output
+.turbo
+
+# ── logs & caches ───────────────────────────────────────
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs
+*.log
+.cache
+.vite
+.eslintcache
+
+# ── editor / OS ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# ── misc ────────────────────────────────────────────────
+coverage
+*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
